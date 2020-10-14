@@ -1,5 +1,5 @@
-import React from 'react';
-import { CssBaseline, AppBar, Toolbar, IconButton, Typography, ListItem, ListItemIcon, ListSubheader, ListItemText, Drawer, List, Divider, Tooltip } from '@material-ui/core';
+import React, { useState } from 'react';
+import { CssBaseline, AppBar, Toolbar, IconButton, Typography, ListItem, ListItemIcon, ListSubheader, ListItemText, Drawer, List, Divider, Tooltip,Menu, MenuItem } from '@material-ui/core';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import DashboardIcon from '@material-ui/icons/DashboardOutlined';
@@ -11,6 +11,39 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import { indigo } from '@material-ui/core/colors';
+
+
+  
+
+function SettingsButton() {
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    return (
+        <div>
+            <IconButton color="inherit" onClick={handleClick}>
+                < SettingsIcon />
+            </IconButton>
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+            </Menu>
+        </div>
+    )
+}
 
 export const mainListItems = (
     <div>
@@ -26,35 +59,29 @@ export const mainListItems = (
             </ListItemIcon>
             <ListItemText primary="Reports" />
         </ListItem>
-        <ListItem button>
-            <ListItemIcon>
-                <LayersIcon />
-            </ListItemIcon>
-            <ListItemText primary="Integrations" />
-        </ListItem>
     </div>
 );
 
 export const secondaryListItems = (
     <div>
-        <ListSubheader inset>Saved reports</ListSubheader>
+        <ListSubheader inset>Saved data</ListSubheader>
         <ListItem button>
             <ListItemIcon>
                 <AssignmentIcon />
             </ListItemIcon>
-            <ListItemText primary="Current month" />
+            <ListItemText primary="Current day" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
                 <AssignmentIcon />
             </ListItemIcon>
-            <ListItemText primary="Last quarter" />
+            <ListItemText primary="Last week" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
                 <AssignmentIcon />
             </ListItemIcon>
-            <ListItemText primary="Year-end sale" />
+            <ListItemText primary="Last month" />
         </ListItem>
     </div>
 );
@@ -115,9 +142,9 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        width: theme.spacing(7),
+        width: theme.spacing(6),
         [theme.breakpoints.up('sm')]: {
-            width: theme.spacing(9),
+            width: theme.spacing(7),
         },
     },
     appBarSpacer: theme.mixins.toolbar,
@@ -142,35 +169,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Navbar() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+    const [isOpen, setIsOpen] = useState(true);
+    const handleDrawer = () => setIsOpen(!isOpen);
+
+
     return (
         <>
             <CssBaseline />
-            <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+            <AppBar position="absolute" className={clsx(classes.appBar, isOpen && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     <IconButton
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+                        onClick={handleDrawer}
+                        className={clsx(classes.menuButton, isOpen && classes.menuButtonHidden)}
                     >
                         <Tooltip title="open" arrow>
                             <ChevronRightIcon />
                         </Tooltip>
                     </IconButton>
-                    <Typography component="h1" variant="subtitle2" color="inherit" noWrap className={classes.title}>
-                        Exchange rates Viewer
+                    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                        exchange rates Viewer
                     </Typography>
-                    <IconButton color="inherit">
-                        < SettingsIcon />
-                    </IconButton>
+                    <SettingsButton />
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -179,12 +201,12 @@ export default function Navbar() {
                 }
                 variant="permanent"
                 classes={{
-                    paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+                    paper: clsx(classes.drawerPaper, !isOpen && classes.drawerPaperClose),
                 }}
-                open={open}
+                open={isOpen}
             >
                 <div className={classes.toolbarIcon}>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={handleDrawer}>
                         <Tooltip title="hide" arrow>
                             <ChevronLeftIcon style={{ color: 'white' }} />
                         </Tooltip>

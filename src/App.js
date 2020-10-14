@@ -1,15 +1,15 @@
 import React from 'react';
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { indigo } from '@material-ui/core/colors';
+import { green, indigo } from '@material-ui/core/colors';
 import Dashboard from './pages/dashboard/Dashboard';
 import Navbar from './components/Navbar';
 import Navigator from './components/Navigator';
 import { Switch, Route } from 'react-router-dom'
 import { Container } from '@material-ui/core';
-import { Details } from './pages/details/Details';
+import Details from './pages/details/Details';
 
 
-const Router = () => (
+const Router = ({route}) => (
   <Switch>
     <Route exact path='/' component={Dashboard} />
     <Route path='/details' component={Details} />
@@ -20,6 +20,9 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: indigo[600]
+    },
+    secondary: {
+      main: green[700]
     }
   }
 })

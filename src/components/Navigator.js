@@ -1,6 +1,6 @@
 import React from 'react';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
-import { Typography, Box, Container, ThemeProvider } from '@material-ui/core';
+import { Typography, Box, Container } from '@material-ui/core';
 import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
@@ -10,10 +10,10 @@ export default function Navigator() {
   return (
     <Container style={{ 'paddingTop': '20px' }}>
       <Typography component='h2'>
-        <Box fontWeight="fontWeightMedium" textAlign='left' style={{ 'display': 'flex' }}>
+        <Box fontWeight="fontWeightBold" textAlign='left' style={{ 'display': 'flex' }}>
           <Link to='/' className='router-link'>Dashboard</Link>
-          {location.symbol ? <ChevronRightRoundedIcon /> : ''}
-          {location.symbol}
+          {location.currency ? <ChevronRightRoundedIcon /> : ''}
+          {location.currency?.symbol}
         </Box>
       </Typography>
     </Container>

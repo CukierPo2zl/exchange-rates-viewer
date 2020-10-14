@@ -1,18 +1,9 @@
 body {
   margin: 0;
-  font-family: 'Roboto', 'Oxygen', 'Helvetica Neue',
-    sans-serif;
+  height: 100%;
+  font-family: "Roboto", "Oxygen", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-:root {
-  --bg:  #242526;
-  --bg-accent: #484a4d;
-  --text-color: #dadce1;
-  --nav-size: 60px;
-  --border: 1px solid #474a4d;
-  --border-radius: 8px;
-  --speed: 500ms; 
 }
 
 ul {
@@ -23,13 +14,18 @@ ul {
 
 a {
   color: var(--text-color);
-  text-decoration: none;;
+  text-decoration: none;
 }
 
-.router-link{
+.router-link {
   color: inherit;
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
-  
+}
+.paper {
+  display: "flex";
+  overflow: "auto";
+  flex-direction: "column";
+  padding: 14px;
 }
