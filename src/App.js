@@ -12,6 +12,7 @@ import Details from './pages/details/Details';
 const Router = ({route}) => (
   <Switch>
     <Route exact path='/' component={Dashboard} />
+    <Route path="/index.html" component={Dashboard} />
     <Route path='/details' component={Details} />
   </Switch>
 )
