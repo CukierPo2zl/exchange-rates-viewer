@@ -1,4 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Exachange rates viewer
+Convert between all major global currencies, historical rates, graphs.
+
+Rates provided by [Exchange Rates API](https://exchangeratesapi.io/)
+
+address: https://studiatozlo-3f69f.web.app/
+
+![example image](https://github.com/CukierPo2zl/exchange-rates-viewer/blob/master/example1.png)
+![example image](https://github.com/CukierPo2zl/exchange-rates-viewer/blob/master/example2.png)
 
 ## Available Scripts
 
